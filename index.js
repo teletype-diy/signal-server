@@ -35,7 +35,9 @@ io.on("connection", async (socket) => {
             //     // do something clever
             // })
         }
-        socket.join(roomName);
+        // TODO: this is almost certainly wrong. but it only works if it is here... what does that mean.
+        // nvm still appears to work.. go to sleep----
+        // socket.join(roomName);
         console.log(data);
         io.to(roomName).emit("peer_info", eventName, data);
         // connected_rooms.push(arg)
