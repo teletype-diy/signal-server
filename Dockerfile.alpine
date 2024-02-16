@@ -1,0 +1,22 @@
+FROM docker.io/node:21-alpine
+
+
+WORKDIR /teletype_signals
+
+COPY index.js package-lock.json package.json .
+
+RUN chown -R 1000:1000 /teletype_signals
+
+USER 1000
+
+ARG USE_DB
+ENV USE_DB=${USE_DB:+1}
+ENV OMIT_OPT=${USE_DB:-"--omit optional"}
+# now OMIT_OPT is either 1 or "--omit optional"
+#ENV OMIT_OPT=${USE_DB:+}
+# remove 1 .. does not work yet..
+#ENV OMIT_OPT=${OMIT_OPT##1}
+
+RUN NODE_ENV=production CI=true npm ci --omit dev ${OMIT_OPT}
+
+CMD ["node", "index.js"]
