@@ -1,0 +1,19 @@
+
+
+services:
+  teletype-signal:
+    # image: example/database
+    build:
+      # context: backend
+      dockerfile: ./Dockerfile.alpine
+    ports:
+      - "3456:3456"
+    environment:
+        DBHOST: postgres
+    restart: always
+  postgres:
+    image: "docker.io/postgres:alpine"
+    environment:
+        POSTGRES_PASSWORD: secret
+  # redis:
+  #   image: "redis:alpine"
