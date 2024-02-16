@@ -18,6 +18,12 @@ io.on("connection", async (socket) => {
     // and then later
     // io.to(userId).emit("peer_info", connected_rooms);
 
+    socket.on("protocol_version", (callback) => {
+        // socket.emit("protocol_version", 9);
+        console.log("someone asked for version");
+        callback({ok: true, body: {version: 9}});
+    })
+
     socket.on("halo_subscribe", (roomName) => {
         console.log(`new halo_subscribe for ${roomName}`);
         if (!connected_rooms.includes(roomName)) {
