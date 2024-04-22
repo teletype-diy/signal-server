@@ -4,6 +4,7 @@ const io = new Server({ /* options */ });
 
 // conditonal import of postgres
 // npm install @socket.io/postgres-adapter pg
+if (process.env.USE_DB)
 try {
     const { createAdapter } = require("@socket.io/postgres-adapter");
     const { Pool } = require("pg");

@@ -8,3 +8,12 @@ services:
     ports:
       - "3456:3456"
     restart: always
+  coturn:
+    image: docker.io/coturn/coturn
+    restart: always
+    ports:
+        - "3478:3478"
+        - "3478:3478/udp"
+        - "5349:5349"
+        - "5349:5349/udp"
+        - "49152-65535:49152-65535/udp"
